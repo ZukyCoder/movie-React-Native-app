@@ -1,25 +1,21 @@
-import {StyleSheet,View, Text, Image} from 'react-native';
+import {StyleSheet,View, Text, ScrollView} from 'react-native';
+import React,{useState} from 'react';
+import MovieScene from './components/MovieScene';
 
-function MovieListView() {
+function MovieListView(props) {
 const movieData = require('./testMovies.json');
 const movieImage = require('./assets/images/defaultCinema.png');
 
     return (
         <View style={styles.mainMovieView}>
             <Text style={styles.textTile}>Movie List View</Text>
-            <View style={styles.movieListView}>
-                {movieData.results.map((movie) => (
-                    <View style={styles.movieCellView}>
-                        <View style={styles.movieCellImageContainer}>
-                           <Image style={styles.movieImage} source={movieImage} />
-                        </View>
-                        <View style={styles.movieCellText}>
-                            <Text>{movie.title}</Text>
-                            <Text>{'Hello'}</Text>
-                        </View>
-                    </View>
-                ))}
-            </View>
+            <ScrollView>
+                <View style={styles.movieListView}>
+                    {props.movies.results?.map((movie, key) => (
+                        <MovieScene key={key} movie={movie} movieImage={movieImage} />
+                    ))}
+                </View>
+            </ScrollView>    
         </View>
     );
 }
@@ -44,41 +40,5 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: 'bold',
         padding: 15
-    },
-    movieCellView:  {
-        width: '45%',
-        height: 250,
-        backgroundColor: '#0000',
-        marginBottom: 25,
-        shadowColor: "black",
-        shadowOffset: {
-            width: 5,
-            height: 5,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 15,
-        elevation: 10, // for android
-    },
-    movieCellImageContainer: {
-        height: 130,
-        width: '100%',
-        backgroundColor: 'white',
-        paddingVertical: 15,
-        borderRadiusTopLeft: 15,
-        borderRadiusTopRight: 15,
-    },
-    movieImage: {
-        resizeMode: 'contain',
-        width: '100%',
-        height: '100%',
-    },
-    movieCellText: {
-        width: '100%',
-        height: 120,
-        textAlign: 'center',
-        fontSize: 20,
-        fontWeight: 'bold',
-        padding: 15,
-        backgroundColor: 'lightblue'
     }
 });
