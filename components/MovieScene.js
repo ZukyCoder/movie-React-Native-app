@@ -1,14 +1,16 @@
 import { StyleSheet,View, Text, Image} from 'react-native';
 function movieScene(props) {
+const imageUrl = `https://image.tmdb.org/t/p/w500${props.movie.poster_path}`
 
     return(
-        <View style={styles.movieCellView}>
-            <View style={styles.movieCellImageContainer}>
-                <Image style={styles.movieImage} source={props.movieImage} />
+        console.log(imageUrl),
+        <View style={movieSceneStyles.movieCellView}>
+            <View style={movieSceneStyles.movieCellImageContainer}>
+                <Image style={movieSceneStyles.movieImage} source={{uri:imageUrl}} />
             </View>
-            <View style={styles.movieCellText}>
-                <Text style={styles.movieTitleText}>{movie.title}</Text>
-                <Text style={styles.movieOverviewText}>{movie.overview.length > 100 ? movie.overview.substring(0, 85) + '...' : movie.overview + '...'}</Text>
+            <View style={movieSceneStyles.movieCellText}>
+                <Text style={movieSceneStyles.movieTitleText}>{props.movie.title}</Text>
+                <Text style={movieSceneStyles.movieOverviewText}>{props.movie.release_date}</Text>
             </View>
         </View>
     )
@@ -16,41 +18,47 @@ function movieScene(props) {
 
 export default movieScene
 
-const styles = StyleSheet.create({
+const movieSceneStyles = StyleSheet.create({
     movieCellView:  {
         width: '45%',
-        height: 270,
+        height: 300,
+        marginBottom: 20,
+        backgroundColor: 'white',
         overflow: 'hidden',
         borderRadius: 15,
         shadowColor: "#000",
         shadowOffset: {
-            width: 3,
-            height: 5,
+            width: -3,
+            height: -5,
         },
         shadowOpacity: 0.4,
-        shadowRadius: 5,
-        elevation: 5,
-        margin: 5
+        shadowRadius: 15,
+        elevation: 3,
     },
     movieCellImageContainer: {
         width: '100%',
-        height: 190,
-        overflow: 'hidden',
+        height: 200,
+        //paddingVertical: 15,
+        //backgroundColor: 'white',
+        //padding: 10
     },
     movieImage: {
+        resizeMode: 'cover',
         width: '100%',
         height: '100%',
     },
     movieCellText: {
-        flex: 1,
+        width: '100%',
+        height: 100,
         padding: 10,
+        backgroundColor: 'lightblue',
     },
     movieTitleText: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
     },
-    movieOverviewText: {
+    movieReleaseText: {
         fontSize: 14,
         color: '#666',
     },

@@ -9,7 +9,7 @@ const movieImage = require('./assets/images/defaultCinema.png');
     return (
         <View style={styles.mainMovieView}>
             <Text style={styles.textTile}>Movie List View</Text>
-            <ScrollView>
+            <ScrollView style={styles.scrollViewStyle}>
                 <View style={styles.movieListView}>
                     {props.movies.results?.map((movie, key) => (
                         <MovieScene key={key} movie={movie} movieImage={movieImage} />
@@ -39,6 +39,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontStyle: 'normal',
         fontWeight: 'bold',
-        padding: 15
+        paddingTop: 10,
+        backgroundColor: '#fff',
+        zIndex: 999
+    },
+    scrollViewStyle: { 
+        backgroundColor: '#0000',
+        alwaysBounceVertical: false,
+        lazyload: true,
+        marginTop: -10
     }
 });
